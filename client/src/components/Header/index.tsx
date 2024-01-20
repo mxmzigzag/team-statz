@@ -4,21 +4,21 @@ import {
   // useContext,
   // useEffect,
   useMemo,
+  useState,
   // useRef,
   // useState,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { NavLink } from "react-router-dom";
-import { Flex, Typography } from "antd";
+import { NavLink, useLocation } from "react-router-dom";
+import { Flex, Select, Typography } from "antd";
 
 // import { SessionContext } from "../../session/session.provider";
 
 // import AuthModal from "../AuthModal/authModal";
 // import Select from "../Select/select";
 
-import { TeamIcon } from "../../assets/icons/TeamIcon";
-import { ScheduleIcon } from "../../assets/icons/ScheduleIcon";
-import { StatsIcon } from "../../assets/icons/StatsIcon";
+import { ELanguages } from "./Header.types";
+import { LANGUAGE_OPTIONS, NAV_ITEMS } from "./Header.assets";
 // import { UserIcon } from "../../assets/icons/userIcon";
 // import { SettingsIcon } from "../../assets/icons/settingsIcon";
 // import { LogoutIcon } from "../../assets/icons/LogoutIcon";
@@ -28,32 +28,20 @@ const { Title, Text } = Typography;
 export const Header = () => {
   // const { isAuthenticated, logOutUser } = useContext(SessionContext);
   // const [modal, setModal] = useState<boolean>(false);
+  const { pathname } = useLocation();
   const {
     t,
     // i18n
   } = useTranslation();
+
+  const [lang, setLang] = useState<ELanguages>(ELanguages.en);
+
   // const userPanelRef = useRef(null);
   // const closeUserPanel: boolean = useOutsideClickHandler(userPanelRef);
 
-  const navItems = useMemo(
-    () => [
-      {
-        id: "team",
-        title: "Team",
-        icon: <TeamIcon width="36px" height="36px" />,
-      },
-      {
-        id: "schedule",
-        title: "Schedule",
-        icon: <ScheduleIcon width="36px" height="36px" />,
-      },
-      {
-        id: "stats",
-        title: "Stats",
-        icon: <StatsIcon width="36px" height="36px" />,
-      },
-    ],
-    []
+  const activeNavItem = useMemo(
+    () => NAV_ITEMS.find((item) => item.id === pathname.slice(1)),
+    [pathname]
   );
 
   // useEffect(() => {
@@ -74,12 +62,7 @@ export const Header = () => {
   // );
 
   return (
-    <Flex
-      align="center"
-      justify="flex-end"
-      component="header"
-      className="p-6 mb-9"
-    >
+    <Flex justify="flex-end" component="header" className="p-6 mb-9">
       <NavLink to="/" className="pr-5 mr-auto">
         <Title level={1} className="relative group">
           Team Stat
@@ -90,32 +73,36 @@ export const Header = () => {
       </NavLink>
       <nav>
         <ul className="flex items-center list-style-none">
-          {navItems.map((item) => (
-            <li className="relative text-lg px-4">
+          {NAV_ITEMS.map((item) => (
+            <li className="relative px-4">
               <NavLink
                 to={`/${item.id}`}
-                className={({ isActive }) =>
-                  `flex flex-col items-center text-zText text-sm ${
-                    isActive ? "text-zGreen" : ""
-                  } transition-all`
-                }
+                className={`group flex flex-col items-center text-sm hover-group:text-zGreen ${
+                  activeNavItem?.id === item.id ? "text-zGreen" : "text-zText"
+                } transition-all`}
               >
                 {item.icon}
-                <span className="mt-1.5">{t(item.title)}</span>
+                <span
+                  className={`mt-1.5 group-hover:opacity-100 group-hover:translate-y-0 ${
+                    activeNavItem?.id === item.id
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 -translate-y-4"
+                  } transition-all`}
+                >
+                  {t(item.title)}
+                </span>
               </NavLink>
             </li>
           ))}
         </ul>
       </nav>
-      {/* <Select
-        options={["en", "ru", "uk"]}
-        className={styles.languageSwitcher}
-        getActive={handleGetActive}
-        defaultValue={Cookie.get("language") || "en"}
-        type="language"
-        arrow={false}
+      <Select
+        defaultValue={ELanguages.en}
+        value={lang}
+        onChange={setLang}
+        options={LANGUAGE_OPTIONS}
       />
-      <span
+      {/* <span
         className={styles.auth}
         onClick={() => toggleModal()}
         ref={userPanelRef}
