@@ -1,6 +1,9 @@
 import React, { FC, useContext, useMemo, useState } from "react";
 import { useIntl } from "react-intl";
 import { createLabels } from "./AuthForm.assets";
+import { Button, Form, Input, Typography } from "antd";
+
+const { Title } = Typography;
 
 // import { User } from "../../session/session.types";
 
@@ -21,13 +24,13 @@ export const AuthForm: FC<IAuthFormProps> = () => {
   // const { logInUser } = useContext(SessionContext);
   // const { loading, clearError } = useHttp();
   // const message = useMessage();
-  const [form, setForm] = useState<any>({ login: "", password: "" });
+  const [form] = Form.useForm();
 
   const labels = useMemo(() => createLabels(intl), [intl]);
 
-  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  // const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setForm({ ...form, [e.target.name]: e.target.value });
+  // };
 
   const loginHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -49,57 +52,39 @@ export const AuthForm: FC<IAuthFormProps> = () => {
   // };
 
   return (
-    <div
-    // className={styles.authModal}
+    <Form
+      form={form}
+      name="auth"
+      layout="vertical"
+      autoComplete="off"
+      requiredMark={false}
+      className="flex flex-col"
     >
-      <h3 className="title">{labels.formTitle}</h3>
-      <form
-        // className={styles.authCont}
-        onSubmit={loginHandler}
+      <Title level={3} className="text-center">
+        {labels.formTitle}
+      </Title>
+
+      <Form.Item
+        name="login"
+        label={labels.loginLabel}
+        rules={[{ required: true }]}
       >
-        <div
-        // className={styles.authInput}
-        >
-          <input
-            type="text"
-            name="login"
-            id="login"
-            placeholder={labels.loginPlaceholder}
-            onChange={changeHandler}
-          />
-          <label htmlFor="login">{labels.loginLabel}</label>
-        </div>
-        <div
-        // className={styles.authInput}
-        >
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder={labels.passwordLabel}
-            onChange={changeHandler}
-          />
-          <label htmlFor="password">{labels.passwordLabel}</label>
-        </div>
-        <div
-        // className={styles.authAction}
-        >
-          <button
-            type="submit"
-            className="btn-submit"
-            // disabled={loading}
-          >
-            {labels.loginButton}
-          </button>
-          {/* <button
-            className="btn-submit"
-            onClick={registerHandler}
-            disabled={loading}
-          >
-            {t("Register")}
-          </button> */}
-        </div>
-      </form>
-    </div>
+        <Input placeholder={labels.loginPlaceholder} />
+      </Form.Item>
+
+      <Form.Item
+        name="password"
+        label={labels.passwordLabel}
+        rules={[{ required: true }]}
+      >
+        <Input placeholder={labels.passwordPlaceholder} />
+      </Form.Item>
+
+      <Form.Item className="flex justify-center mb-0">
+        <Button type="primary" htmlType="submit">
+          {labels.loginButton}
+        </Button>
+      </Form.Item>
+    </Form>
   );
 };

@@ -129,7 +129,11 @@ export const Header = () => {
           </div>
         ) : null} */}
       </button>
-      <Modal open={isModalOpen} onCancel={() => setIsModalOpen(false)}>
+      <Modal
+        open={isModalOpen}
+        onCancel={() => setIsModalOpen(false)}
+        footer={false}
+      >
         <AuthForm />
       </Modal>
       {/*  {modal && !isAuthenticated ? (
