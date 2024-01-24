@@ -9,7 +9,7 @@ import {
   // useState,
 } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { Flex, Modal, Select, Typography } from "antd";
+import { Flex, Modal, Popover, Select, Typography } from "antd";
 
 // import { SessionContext } from "../../session/session.provider";
 
@@ -21,6 +21,8 @@ import { LANGUAGE_OPTIONS, NAV_ITEMS, createLabels } from "./Header.assets";
 import { UserIcon } from "../../assets/icons/UserIcon";
 import { AuthForm } from "../AuthForm";
 import { useIntl } from "react-intl";
+import { SettingsIcon } from "../../assets/icons/SettingsIcon";
+import { LogoutIcon } from "../../assets/icons/LogoutIcon";
 // import { SettingsIcon } from "../../assets/icons/settingsIcon";
 // import { LogoutIcon } from "../../assets/icons/LogoutIcon";
 
@@ -29,10 +31,12 @@ const { Title, Text } = Typography;
 export const Header = () => {
   const intl = useIntl();
   // const { isAuthenticated, logOutUser } = useContext(SessionContext);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const isAuthenticated = true;
   const { pathname } = useLocation();
 
   const [lang, setLang] = useState<ELanguages>(ELanguages.en);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isUserPanelOpen, setIsUserPanelOpen] = useState<boolean>(false);
 
   const labels = useMemo(() => createLabels(intl), [intl]);
 
@@ -102,46 +106,63 @@ export const Header = () => {
         onChange={setLang}
         options={LANGUAGE_OPTIONS}
       />
-      <button
-        className="group relative px-4 cursor-pointer flex flex-col items-center text-sm"
-        onClick={() => setIsModalOpen(true)}
-      >
-        <UserIcon width="36px" height="36px" />
-        <Text className="mt-1.5 opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:text-zGreen group-hover:translate-y-0 transition-all">
-          {labels.authTooltip}
-        </Text>
-        {/* {isAuthenticated ? (
-          <div
-            className={`${styles.userPanel} ${
-              modal ? styles.userPanelOpened : ""
-            }`}
+
+      {isAuthenticated ? (
+        <Popover
+          arrow={false}
+          content={
+            <Flex vertical gap={10}>
+              <NavLink to={"/app/settings"}>
+                <SettingsIcon
+                  width={30}
+                  height={30}
+                  className="hover:fill-zGreen transition-all"
+                />
+              </NavLink>
+              <button type="button" onClick={() => console.log("LOGOUT")}>
+                <LogoutIcon
+                  width={30}
+                  height={30}
+                  className="hover:fill-zRed transition-all"
+                />
+              </button>
+            </Flex>
+          }
+          trigger="click"
+          open={isUserPanelOpen}
+          onOpenChange={setIsUserPanelOpen}
+        >
+          <button
+            className="group relative px-4 cursor-pointer flex flex-col items-center text-sm h-fit"
+            onClick={() => setIsUserPanelOpen(!isUserPanelOpen)}
           >
-            <NavLink to={"/app/settings"}>
-              <SettingsIcon width="30px" height="30px" />
-            </NavLink>
-            <button
-              type="button"
-              onClick={() => logOutUser()}
-              className={styles.hoverLogout}
-            >
-              <LogoutIcon width="30px" height="30px" />
-            </button>
-          </div>
-        ) : null} */}
-      </button>
-      <Modal
-        open={isModalOpen}
-        onCancel={() => setIsModalOpen(false)}
-        footer={false}
-      >
-        <AuthForm />
-      </Modal>
-      {/*  {modal && !isAuthenticated ? (
+            <UserIcon
+              width="36px"
+              height="36px"
+              className="group-hover:fill-zGreen transition-all"
+            />
+          </button>
+        </Popover>
+      ) : (
         <>
-          <AuthModal closeOnLogin={closeOnLogin} />
-          <div className={styles.modalBg} onClick={() => toggleModal()} />
+          <button
+            className="group relative px-4 cursor-pointer flex flex-col items-center text-sm"
+            onClick={() => setIsModalOpen(true)}
+          >
+            <UserIcon width="36px" height="36px" />
+            <Text className="mt-1.5 opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:text-zGreen group-hover:translate-y-0 transition-all">
+              {labels.authTooltip}
+            </Text>
+          </button>
+          <Modal
+            open={isModalOpen}
+            onCancel={() => setIsModalOpen(false)}
+            footer={false}
+          >
+            <AuthForm />
+          </Modal>
         </>
-      ) : null} */}
+      )}
     </Flex>
   );
 };
