@@ -8,7 +8,6 @@ import {
   // useRef,
   // useState,
 } from "react";
-import { useTranslation } from "react-i18next";
 import { NavLink, useLocation } from "react-router-dom";
 import { Flex, Modal, Select, Typography } from "antd";
 
@@ -18,24 +17,24 @@ import { Flex, Modal, Select, Typography } from "antd";
 // import Select from "../Select/select";
 
 import { ELanguages } from "./Header.types";
-import { LANGUAGE_OPTIONS, NAV_ITEMS } from "./Header.assets";
+import { LANGUAGE_OPTIONS, NAV_ITEMS, createLabels } from "./Header.assets";
 import { UserIcon } from "../../assets/icons/UserIcon";
 import { AuthForm } from "../AuthForm";
+import { useIntl } from "react-intl";
 // import { SettingsIcon } from "../../assets/icons/settingsIcon";
 // import { LogoutIcon } from "../../assets/icons/LogoutIcon";
 
 const { Title, Text } = Typography;
 
 export const Header = () => {
+  const intl = useIntl();
   // const { isAuthenticated, logOutUser } = useContext(SessionContext);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { pathname } = useLocation();
-  const {
-    t,
-    // i18n
-  } = useTranslation();
 
   const [lang, setLang] = useState<ELanguages>(ELanguages.en);
+
+  const labels = useMemo(() => createLabels(intl), [intl]);
 
   // const userPanelRef = useRef(null);
   // const closeUserPanel: boolean = useOutsideClickHandler(userPanelRef);
@@ -83,15 +82,15 @@ export const Header = () => {
                 } transition-all`}
               >
                 {item.icon}
-                <span
+                <Text
                   className={`mt-1.5 group-hover:opacity-100 group-hover:text-zGreen group-hover:translate-y-0 ${
                     activeNavItem?.id === item.id
                       ? "opacity-100 translate-y-0"
                       : "opacity-0 -translate-y-4"
                   } transition-all`}
                 >
-                  {t(item.title)}
-                </span>
+                  {item.title}
+                </Text>
               </NavLink>
             </li>
           ))}
@@ -108,9 +107,9 @@ export const Header = () => {
         onClick={() => setIsModalOpen(true)}
       >
         <UserIcon width="36px" height="36px" />
-        <span className="mt-1.5 opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:text-zGreen group-hover:translate-y-0 transition-all">
-          {t("Moder")}
-        </span>
+        <Text className="mt-1.5 opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:text-zGreen group-hover:translate-y-0 transition-all">
+          {labels.authTooltip}
+        </Text>
         {/* {isAuthenticated ? (
           <div
             className={`${styles.userPanel} ${

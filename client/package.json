@@ -7,6 +7,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "locales:extract": "formatjs extract \"src/**/*.{ts,tsx}\" --out-file src/i18n/sources/en.json --ignore \"src/**/*.d.ts\"",
+    "locales:compile": "formatjs compile-folder --ast src/i18n/sources src/i18n/locales",
+    "locales:build": "npm run locales:extract && npm run locales:compile",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -15,7 +18,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
-    "react-i18next": "^14.0.0",
+    "react-intl": "^6.6.1",
     "react-router-dom": "^6.21.1"
   },
   "devDependencies": {

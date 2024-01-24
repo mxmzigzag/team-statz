@@ -1,3 +1,4 @@
+import { IntlShape } from "react-intl";
 import { ScheduleIcon } from "../../assets/icons/ScheduleIcon";
 import { StatsIcon } from "../../assets/icons/StatsIcon";
 import { TeamIcon } from "../../assets/icons/TeamIcon";
@@ -27,4 +28,11 @@ const LANGUAGE_OPTIONS = [
   { value: ELanguages.ru, label: ELanguages.ru.toUpperCase() },
 ];
 
-export { LANGUAGE_OPTIONS, NAV_ITEMS };
+const createLabels = (intl: IntlShape) => ({
+  authTooltip: intl.formatMessage({
+    id: "Auth.Tooltip.Title",
+    defaultMessage: "Moder",
+  }),
+});
+
+export { LANGUAGE_OPTIONS, NAV_ITEMS, createLabels };

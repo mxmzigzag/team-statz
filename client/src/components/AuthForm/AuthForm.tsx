@@ -1,5 +1,6 @@
-import React, { FC, useContext, useState } from "react";
-import { useTranslation } from "react-i18next";
+import React, { FC, useContext, useMemo, useState } from "react";
+import { useIntl } from "react-intl";
+import { createLabels } from "./AuthForm.assets";
 
 // import { User } from "../../session/session.types";
 
@@ -15,11 +16,14 @@ interface IAuthFormProps {
 }
 
 export const AuthForm: FC<IAuthFormProps> = () => {
+  const intl = useIntl();
+
   // const { logInUser } = useContext(SessionContext);
   // const { loading, clearError } = useHttp();
   // const message = useMessage();
-  const { t } = useTranslation();
   const [form, setForm] = useState<any>({ login: "", password: "" });
+
+  const labels = useMemo(() => createLabels(intl), [intl]);
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -48,7 +52,7 @@ export const AuthForm: FC<IAuthFormProps> = () => {
     <div
     // className={styles.authModal}
     >
-      <h3 className="title">{t("Authentication")}</h3>
+      <h3 className="title">{labels.formTitle}</h3>
       <form
         // className={styles.authCont}
         onSubmit={loginHandler}
@@ -60,10 +64,10 @@ export const AuthForm: FC<IAuthFormProps> = () => {
             type="text"
             name="login"
             id="login"
-            placeholder="Login"
+            placeholder={labels.loginPlaceholder}
             onChange={changeHandler}
           />
-          <label htmlFor="login">{t("Login")}</label>
+          <label htmlFor="login">{labels.loginLabel}</label>
         </div>
         <div
         // className={styles.authInput}
@@ -72,10 +76,10 @@ export const AuthForm: FC<IAuthFormProps> = () => {
             type="password"
             name="password"
             id="password"
-            placeholder="Password"
+            placeholder={labels.passwordLabel}
             onChange={changeHandler}
           />
-          <label htmlFor="password">{t("Password")}</label>
+          <label htmlFor="password">{labels.passwordLabel}</label>
         </div>
         <div
         // className={styles.authAction}
@@ -85,7 +89,7 @@ export const AuthForm: FC<IAuthFormProps> = () => {
             className="btn-submit"
             // disabled={loading}
           >
-            {t("Login")}
+            {labels.loginButton}
           </button>
           {/* <button
             className="btn-submit"
