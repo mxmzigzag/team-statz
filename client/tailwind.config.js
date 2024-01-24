@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         zText: "#1f1f1f",
-        zGreen: "#31ad31",
+        zGreen: "#7dce94",
         zGreenHover: "#cfd7e3",
         zPurple: "#d367d3",
         zRed: "#ff5e6c",

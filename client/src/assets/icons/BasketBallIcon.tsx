@@ -18,20 +18,20 @@ export const BasketBallIcon: React.FC<React.ComponentPropsWithoutRef<"svg">> = (
         cy="50"
         r="40.25"
         fill="#ffffff"
-        stroke="#31ad31"
+        stroke="#7dce94"
         strokeWidth="4.5"
       />
-      <path d="M50 10L50 90" stroke="#31ad31" strokeWidth="4" />
+      <path d="M50 10L50 90" stroke="#7dce94" strokeWidth="4" />
       <path
         d="M21.715728752538098 21.7157287525381 A40 40 0 0 1 21.715728752538098 78.2842712474619"
         fill="none"
-        stroke="#31ad31"
+        stroke="#7dce94"
         strokeWidth="4"
       />
       <path
         d="M78.2842712474619 21.7157287525381 A40 40 0 0 0 78.2842712474619 78.2842712474619"
         fill="none"
-        stroke="#31ad31"
+        stroke="#7dce94"
         strokeWidth="4"
       />
       <g transform="translate(0 50)">
@@ -39,7 +39,7 @@ export const BasketBallIcon: React.FC<React.ComponentPropsWithoutRef<"svg">> = (
           <path
             d="M10 0A40 40 0 0 1 90 0"
             fill="none"
-            stroke="#31ad31"
+            stroke="#7dce94"
             strokeWidth="4"
           >
             <animate
@@ -56,7 +56,7 @@ export const BasketBallIcon: React.FC<React.ComponentPropsWithoutRef<"svg">> = (
           <path
             d="M10 0A40 40 0 0 1 90 0"
             fill="none"
-            stroke="#31ad31"
+            stroke="#7dce94"
             strokeWidth="4"
           >
             <animate
