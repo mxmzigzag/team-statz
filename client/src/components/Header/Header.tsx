@@ -23,6 +23,7 @@ import { AuthForm } from "../AuthForm";
 import { useIntl } from "react-intl";
 import { SettingsIcon } from "../../assets/icons/SettingsIcon";
 import { LogoutIcon } from "../../assets/icons/LogoutIcon";
+import { useLocale } from "../../hooks/useLocale";
 // import { SettingsIcon } from "../../assets/icons/settingsIcon";
 // import { LogoutIcon } from "../../assets/icons/LogoutIcon";
 
@@ -30,15 +31,16 @@ const { Title, Text } = Typography;
 
 export const Header = () => {
   const intl = useIntl();
+  const { locale, changeLocale } = useLocale();
   // const { isAuthenticated, logOutUser } = useContext(SessionContext);
-  const isAuthenticated = true;
+  const isAuthenticated = false; // TODO: change it
   const { pathname } = useLocation();
 
-  const [lang, setLang] = useState<ELanguages>(ELanguages.en);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isUserPanelOpen, setIsUserPanelOpen] = useState<boolean>(false);
 
   const labels = useMemo(() => createLabels(intl), [intl]);
+  console.log("intl", intl, labels);
 
   // const userPanelRef = useRef(null);
   // const closeUserPanel: boolean = useOutsideClickHandler(userPanelRef);
@@ -104,9 +106,10 @@ export const Header = () => {
 
         <Select
           defaultValue={ELanguages.en}
-          value={lang}
-          onChange={setLang}
+          value={locale}
+          onChange={changeLocale}
           options={LANGUAGE_OPTIONS}
+          popupClassName="text-center"
         />
 
         {isAuthenticated ? (

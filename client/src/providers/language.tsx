@@ -7,9 +7,9 @@ export const LanguageProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
   return (
     <IntlProvider
-      messages={messages}
       locale={locale}
       defaultLocale={defaultLocale}
+      messages={messages}
     >
       {children}
     </IntlProvider>

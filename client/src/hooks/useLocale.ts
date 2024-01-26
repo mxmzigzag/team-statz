@@ -1,31 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+
+import { ELanguages } from "../components/Header/Header.types";
+
 import enMessages from "../i18n/locales/en.json";
+import uaMessages from "../i18n/locales/ua.json";
+import ruMessages from "../i18n/locales/ru.json";
 
 type IMessages = typeof enMessages;
 
-const defaultLocale = "en";
-const locale = "en"; // TODO: get from SM2 after integration
+const defaultLocale = ELanguages.en;
 
 const translations = {
   en: enMessages,
+  ua: uaMessages,
+  ru: ruMessages,
 };
 
 export const useLocale = () => {
+  const [locale, setLocale] = useState<ELanguages>(ELanguages.en);
   const [messages, setMessages] = useState<IMessages>();
 
-  useEffect(() => {
-    // TODO: return back dynamic loading after integration with SM2
-    // import(`@i18n/locales/${locale}.json`).then(({ default: messages }) => {
-    //   setMessages(messages);
-    // });
-
-    const messages = translations[locale];
-    setMessages(messages);
-  }, []);
+  const onLocaleChange = (newLocale: ELanguages) => {
+    setLocale(newLocale);
+    setMessages(translations[newLocale]);
+  };
 
   return {
     messages,
     defaultLocale,
     locale,
+    changeLocale: onLocaleChange,
   };
 };
