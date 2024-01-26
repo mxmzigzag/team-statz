@@ -1,0 +1,23 @@
+{
+  "Auth.Form.Button.Login": {
+    "defaultMessage": "Залогінитися"
+  },
+  "Auth.Form.Field.Login.Label": {
+    "defaultMessage": "Логін"
+  },
+  "Auth.Form.Field.Login.Placeholder": {
+    "defaultMessage": "Логін"
+  },
+  "Auth.Form.Field.Password.Label": {
+    "defaultMessage": "Пароль"
+  },
+  "Auth.Form.Field.Password.Placeholder": {
+    "defaultMessage": "Пароль"
+  },
+  "Auth.Form.Title": {
+    "defaultMessage": "Автентикація"
+  },
+  "Auth.Tooltip.Title": {
+    "defaultMessage": "Модератор"
+  }
+}

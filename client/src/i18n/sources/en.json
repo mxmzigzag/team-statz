@@ -1,0 +1,23 @@
+{
+  "Auth.Form.Button.Login": {
+    "defaultMessage": "Login"
+  },
+  "Auth.Form.Field.Login.Label": {
+    "defaultMessage": "Login"
+  },
+  "Auth.Form.Field.Login.Placeholder": {
+    "defaultMessage": "Login"
+  },
+  "Auth.Form.Field.Password.Label": {
+    "defaultMessage": "Password"
+  },
+  "Auth.Form.Field.Password.Placeholder": {
+    "defaultMessage": "Password"
+  },
+  "Auth.Form.Title": {
+    "defaultMessage": "Authentication"
+  },
+  "Auth.Tooltip.Title": {
+    "defaultMessage": "Moder"
+  }
+}

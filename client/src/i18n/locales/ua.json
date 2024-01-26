@@ -1,4 +1,40 @@
 {
+  "Auth.Form.Button.Login": [
+    {
+      "type": 0,
+      "value": "Залогінитися"
+    }
+  ],
+  "Auth.Form.Field.Login.Label": [
+    {
+      "type": 0,
+      "value": "Логін"
+    }
+  ],
+  "Auth.Form.Field.Login.Placeholder": [
+    {
+      "type": 0,
+      "value": "Логін"
+    }
+  ],
+  "Auth.Form.Field.Password.Label": [
+    {
+      "type": 0,
+      "value": "Пароль"
+    }
+  ],
+  "Auth.Form.Field.Password.Placeholder": [
+    {
+      "type": 0,
+      "value": "Пароль"
+    }
+  ],
+  "Auth.Form.Title": [
+    {
+      "type": 0,
+      "value": "Автентикація"
+    }
+  ],
   "Auth.Tooltip.Title": [
     {
       "type": 0,

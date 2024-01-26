@@ -1,4 +1,40 @@
 {
+  "Auth.Form.Button.Login": [
+    {
+      "type": 0,
+      "value": "Login"
+    }
+  ],
+  "Auth.Form.Field.Login.Label": [
+    {
+      "type": 0,
+      "value": "Login"
+    }
+  ],
+  "Auth.Form.Field.Login.Placeholder": [
+    {
+      "type": 0,
+      "value": "Login"
+    }
+  ],
+  "Auth.Form.Field.Password.Label": [
+    {
+      "type": 0,
+      "value": "Password"
+    }
+  ],
+  "Auth.Form.Field.Password.Placeholder": [
+    {
+      "type": 0,
+      "value": "Password"
+    }
+  ],
+  "Auth.Form.Title": [
+    {
+      "type": 0,
+      "value": "Authentication"
+    }
+  ],
   "Auth.Tooltip.Title": [
     {
       "type": 0,

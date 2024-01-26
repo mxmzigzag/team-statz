@@ -6,7 +6,12 @@ import enMessages from "../i18n/locales/en.json";
 import uaMessages from "../i18n/locales/ua.json";
 import ruMessages from "../i18n/locales/ru.json";
 
-type IMessages = typeof enMessages;
+type IMessages = {
+  [key: string]: {
+    type: number;
+    value: string;
+  }[];
+};
 
 const defaultLocale = ELanguages.en;
 
