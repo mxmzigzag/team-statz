@@ -40,7 +40,6 @@ export const Header = () => {
   const [isUserPanelOpen, setIsUserPanelOpen] = useState<boolean>(false);
 
   const labels = useMemo(() => createLabels(intl), [intl]);
-  console.log("intl", intl, labels);
 
   // const userPanelRef = useRef(null);
   // const closeUserPanel: boolean = useOutsideClickHandler(userPanelRef);
