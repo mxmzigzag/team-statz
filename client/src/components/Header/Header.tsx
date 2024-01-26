@@ -66,8 +66,8 @@ export const Header = () => {
   // );
 
   return (
-    <Flex justify="flex-end" component="header" className="p-6 mb-9">
-      <NavLink to="/" className="pr-5 mr-auto">
+    <Flex justify="space-between" component="header" className="p-6 mb-9">
+      <NavLink to="/" className="pr-5">
         <Title level={1} className="relative group">
           Team Stat
           <Text className="flex items-center justify-center text-white absolute -right-6 top-1/4 -translate-y-1/2 bg-zGreen rounded-full w-5 h-5 group-hover:rotate-180 transition-all">
@@ -75,94 +75,97 @@ export const Header = () => {
           </Text>
         </Title>
       </NavLink>
-      <nav>
-        <ul className="flex items-center list-style-none">
-          {NAV_ITEMS.map((item) => (
-            <li className="relative px-4">
-              <NavLink
-                to={`/${item.id}`}
-                className={`group flex flex-col items-center text-sm ${
-                  activeNavItem?.id === item.id ? "text-zGreen" : "text-zText"
-                } transition-all`}
-              >
-                {item.icon}
-                <Text
-                  className={`mt-1.5 group-hover:opacity-100 group-hover:text-zGreen group-hover:translate-y-0 ${
-                    activeNavItem?.id === item.id
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 -translate-y-4"
+      <Flex gap={16}>
+        <nav>
+          <ul className="flex items-center gap-4 list-style-none">
+            {NAV_ITEMS.map((item) => (
+              <li className="relative">
+                <NavLink
+                  to={`/${item.id}`}
+                  className={`group flex flex-col items-center text-sm ${
+                    activeNavItem?.id === item.id ? "text-zGreen" : "text-zText"
                   } transition-all`}
                 >
-                  {item.title}
-                </Text>
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      </nav>
-      <Select
-        defaultValue={ELanguages.en}
-        value={lang}
-        onChange={setLang}
-        options={LANGUAGE_OPTIONS}
-      />
+                  {item.icon}
+                  <Text
+                    className={`mt-1.5 group-hover:opacity-100 group-hover:text-zGreen group-hover:translate-y-0 ${
+                      activeNavItem?.id === item.id
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 -translate-y-4"
+                    } transition-all`}
+                  >
+                    {item.title}
+                  </Text>
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-      {isAuthenticated ? (
-        <Popover
-          arrow={false}
-          content={
-            <Flex vertical gap={10}>
-              <NavLink to={"/app/settings"}>
-                <SettingsIcon
-                  width={30}
-                  height={30}
-                  className="hover:fill-zGreen transition-all"
-                />
-              </NavLink>
-              <button type="button" onClick={() => console.log("LOGOUT")}>
-                <LogoutIcon
-                  width={30}
-                  height={30}
-                  className="hover:fill-zRed transition-all"
-                />
-              </button>
-            </Flex>
-          }
-          trigger="click"
-          open={isUserPanelOpen}
-          onOpenChange={setIsUserPanelOpen}
-        >
-          <button
-            className="group relative px-4 cursor-pointer flex flex-col items-center text-sm h-fit"
-            onClick={() => setIsUserPanelOpen(!isUserPanelOpen)}
+        <Select
+          defaultValue={ELanguages.en}
+          value={lang}
+          onChange={setLang}
+          options={LANGUAGE_OPTIONS}
+        />
+
+        {isAuthenticated ? (
+          <Popover
+            arrow={false}
+            content={
+              <Flex vertical gap={10}>
+                <NavLink to={"/app/settings"}>
+                  <SettingsIcon
+                    width={30}
+                    height={30}
+                    className="hover:fill-zGreen transition-all"
+                  />
+                </NavLink>
+                <button type="button" onClick={() => console.log("LOGOUT")}>
+                  <LogoutIcon
+                    width={30}
+                    height={30}
+                    className="hover:fill-zRed transition-all"
+                  />
+                </button>
+              </Flex>
+            }
+            trigger="click"
+            open={isUserPanelOpen}
+            onOpenChange={setIsUserPanelOpen}
           >
-            <UserIcon
-              width="36px"
-              height="36px"
-              className="group-hover:fill-zGreen transition-all"
-            />
-          </button>
-        </Popover>
-      ) : (
-        <>
-          <button
-            className="group relative px-4 cursor-pointer flex flex-col items-center text-sm"
-            onClick={() => setIsModalOpen(true)}
-          >
-            <UserIcon width="36px" height="36px" />
-            <Text className="mt-1.5 opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:text-zGreen group-hover:translate-y-0 transition-all">
-              {labels.authTooltip}
-            </Text>
-          </button>
-          <Modal
-            open={isModalOpen}
-            onCancel={() => setIsModalOpen(false)}
-            footer={false}
-          >
-            <AuthForm />
-          </Modal>
-        </>
-      )}
+            <button
+              className="group relative cursor-pointer flex flex-col items-center text-sm h-fit"
+              onClick={() => setIsUserPanelOpen(!isUserPanelOpen)}
+            >
+              <UserIcon
+                width="36px"
+                height="36px"
+                className="group-hover:fill-zGreen transition-all"
+              />
+            </button>
+          </Popover>
+        ) : (
+          <>
+            <button
+              className="group relative cursor-pointer flex flex-col items-center text-sm"
+              onClick={() => setIsModalOpen(true)}
+            >
+              <UserIcon width="36px" height="36px" />
+              <Text className="mt-1.5 opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:text-zGreen group-hover:translate-y-0 transition-all">
+                {labels.authTooltip}
+              </Text>
+            </button>
+            <Modal
+              open={isModalOpen}
+              onCancel={() => setIsModalOpen(false)}
+              footer={false}
+            >
+              <AuthForm />
+            </Modal>
+          </>
+        )}
+      </Flex>
     </Flex>
   );
 };
