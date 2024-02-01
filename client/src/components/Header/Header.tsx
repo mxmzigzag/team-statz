@@ -80,7 +80,7 @@ export const Header = () => {
         <nav>
           <ul className="flex items-center gap-4 list-style-none">
             {NAV_ITEMS.map((item) => (
-              <li className="relative">
+              <li key={item.id} className="relative">
                 <NavLink
                   to={`/${item.id}`}
                   className={`group flex flex-col items-center text-sm ${

@@ -52,7 +52,12 @@ export const Standings = () => {
       {standings ? (
         Object.entries(prepareStandings(standings)).map(
           ([conference, teams]) => (
-            <Flex vertical align="center" className="mx-8 w-[400px]">
+            <Flex
+              key={conference}
+              vertical
+              align="center"
+              className="mx-8 w-[400px]"
+            >
               {teams.length > 1 ? (
                 <Text className="text-lg pb-4 capitalize">{conference}</Text>
               ) : null}
