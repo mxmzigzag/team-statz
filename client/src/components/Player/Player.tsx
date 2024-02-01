@@ -21,6 +21,7 @@ import { JerseyIcon } from "../../assets/icons/JerseyIcon";
 import { WeightIcon } from "../../assets/icons/WeightIcon";
 import { createLabels } from "./Player.assets";
 import { TableSheet } from "../TableSheet";
+import { PlayerCanvas } from "../PlayerCanvas";
 
 const { Title, Text } = Typography;
 
@@ -140,8 +141,7 @@ export const Player = () => {
               </ul> */}
             </Flex>
             <Flex className="w-1/2">
-              {/* <PlayerCanvas player={player._id} games={gamesInfo} /> */}
-              <span>2019</span>
+              <PlayerCanvas playerId={player.id} games={games} />
               {/* <div className={styles.seasons}>
               <span>2019</span>
               <span className={styles.activeSeason}>2020</span>

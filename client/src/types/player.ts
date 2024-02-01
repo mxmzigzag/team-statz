@@ -68,5 +68,5 @@ interface IPlayer {
   plus_minus: number;
 }
 
-export type { IPlayer, IPlayerStatistic };
+export type { IPlayer, IPlayerStatistic, ICoordinate };
 export { EPlayerPosition };
