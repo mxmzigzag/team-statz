@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 
 import PageLayout from "./layout/PageLayout";
 import Home from "./pages/Home";
+import Team from "./pages/Team";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
@@ -10,6 +11,7 @@ function App() {
     <Routes>
       <Route path="/" element={<PageLayout />}>
         <Route index element={<Home />} />
+        <Route path="team" element={<Team />} />
         <Route path="settings" element={<Settings />} />
         <Route path="*" element={<NotFound />} />
       </Route>

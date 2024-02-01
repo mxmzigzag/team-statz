@@ -5,15 +5,11 @@ export const useDB = () => {
   const database = db as IDatabase;
 
   const getAll = (name: keyof IDatabase) => {
-    if (database[name]) return database[name];
-
-    return null;
+    return database[name];
   };
 
   const getFirst = (name: keyof IDatabase) => {
-    if (database[name]) return database[name][0];
-
-    return null;
+    return database[name][0];
   };
 
   return { getAll, getFirst };
