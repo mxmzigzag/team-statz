@@ -1,3 +1,21 @@
+import { Button, Flex, Result } from "antd";
+import { useNavigate } from "react-router-dom";
+
 export default function NotFound() {
-  return <div>NotFound</div>;
+  const navigation = useNavigate();
+
+  return (
+    <Flex justify="center">
+      <Result
+        status="404"
+        title="404"
+        subTitle="Sorry, the page you visited does not exist."
+        extra={
+          <Button type="primary" onClick={() => navigation("/")}>
+            Back Home
+          </Button>
+        }
+      />
+    </Flex>
+  );
 }
