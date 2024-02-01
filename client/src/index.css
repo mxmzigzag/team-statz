@@ -35,6 +35,11 @@ button.ant-btn.ant-btn-primary:hover {
   color: #7dce94 !important;
 }
 
+button.ant-btn.ant-btn-primary.ant-btn-dangerous:hover {
+  border-color: #ff5e6c !important;
+  color: #ff5e6c !important;
+}
+
 /* ant modal */
 .ant-modal .ant-modal-close {
   top: 12px;
