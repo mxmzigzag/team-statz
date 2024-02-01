@@ -9,7 +9,7 @@ import { useDB } from "../../db";
 import { IGame } from "../../types/game";
 import { IPlayer, IPlayerStatistic } from "../../types/player";
 
-import { MONTHS } from "../../helpers/time.helpers";
+import { MONTHS } from "../../utils/time";
 
 // import PlayerCanvas from "../PlayerCanvas/playerCanvas";
 // import TableSheet from "../TableSheet/tableSheet";
@@ -20,6 +20,7 @@ import { HeightIcon } from "../../assets/icons/HeightIcon";
 import { JerseyIcon } from "../../assets/icons/JerseyIcon";
 import { WeightIcon } from "../../assets/icons/WeightIcon";
 import { createLabels } from "./Player.assets";
+import { TableSheet } from "../TableSheet";
 
 const { Title, Text } = Typography;
 
@@ -148,11 +149,11 @@ export const Player = () => {
             </div> */}
             </Flex>
           </Flex>
-          <Flex className="w-full">
+          <Flex vertical className="w-full">
             <Title level={5} className="text-center">
               {labels.statsOfCareer}
             </Title>
-            {/* <TableSheet tableStats={player} /> */}
+            <TableSheet player={player} />
             {overallStats ? (
               <Flex
                 align="center"
@@ -243,7 +244,7 @@ export const Player = () => {
                 </Flex>
               </Flex>
             ) : null}
-            <Flex className="mt-8">
+            <Flex vertical className="mt-8">
               <Title level={5} className="text-center">
                 {labels.hightlights}
               </Title>

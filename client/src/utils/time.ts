@@ -1,4 +1,4 @@
-import { parseToFixedWithoutZero } from "./number.helpers";
+import { parseToFixedWithoutZero } from "./number";
 
 export const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 export const MONTHS = [
