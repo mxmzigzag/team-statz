@@ -12,5 +12,9 @@ export const useDB = () => {
     return database[name][0];
   };
 
-  return { getAll, getFirst };
+  const getOneById = (name: keyof IDatabase, id: string) => {
+    return database[name].find((node) => node.id === id);
+  };
+
+  return { getAll, getFirst, getOneById };
 };
